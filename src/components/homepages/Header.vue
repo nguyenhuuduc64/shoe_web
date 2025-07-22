@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <div class="container">
+    <div class="container" style="display: block">
       <!-- nb = navbar -->
       <div class="nb-wp">
         <div class="nb-main">
@@ -310,6 +310,7 @@ export default {
       searchQuery: "",
       cart: [],
       suggestedProducts: [],
+      searchProducts: [],
       showCart: false, // Mặc định ẩn giỏ hàng,
       showCheckoutModal: false, // Điều khiển hiển thị modal
       order: {
@@ -343,7 +344,13 @@ export default {
   methods: {
     handleSearch() {
       console.log("da handle search", this.searchQuery);
+
       if (this.searchQuery) {
+        axios.get("http://localhost:5000/api/products").then((res) => {
+          this.suggestedProducts = res.data.filter((p) =>
+            p.SP_ten.toLowerCase().includes(this.searchQuery.toLowerCase())
+          );
+        });
       } else {
         this.$router.push({
           path: "/search",
@@ -364,7 +371,7 @@ export default {
       });
 
       axios.get("http://localhost:5000/api/products").then((res) => {
-        this.suggestedProducts = res.data.filter((p) =>
+        this.searchProducts = res.data.filter((p) =>
           p.SP_ten.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
       });

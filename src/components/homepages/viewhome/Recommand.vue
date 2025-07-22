@@ -7,7 +7,6 @@
         :key="product.id"
         @click="$emit('select', product)"
       >
-        <img :src="product.SP_hinh_anh" class="product_img" />
         {{ product.SP_ten }}
       </li>
     </ul>
@@ -16,8 +15,10 @@
 <style scoped>
 .wrapper {
   position: absolute;
-  top: 100px;
+  top: 80px;
   background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
 }
 .product_img {
   width: 30px;
