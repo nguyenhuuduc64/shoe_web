@@ -2,9 +2,9 @@
   <div>
     <h2>Sản Phẩm Mới Về</h2>
     <div class="product-grid">
-      <div 
-        v-for="product in products" 
-        :key="product.SP_ma" 
+      <div
+        v-for="product in products"
+        :key="product.SP_ma"
         class="product-card"
         @click="openModal(product)"
       >
@@ -21,13 +21,32 @@
         <img :src="selectedProduct.SP_hinh_anh" :alt="selectedProduct.SP_ten" />
         <div class="modal-content">
           <h2>{{ selectedProduct.SP_ten }}</h2>
-          <p><strong>Giá:</strong> <span style="color: red">{{ selectedProduct.SP_price.toLocaleString() }} đ</span></p>
+          <p>
+            <strong>Giá:</strong>
+            <span style="color: red"
+              >{{ selectedProduct.SP_price.toLocaleString() }} đ</span
+            >
+          </p>
           <p><strong>Tình trạng:</strong> Còn hàng</p>
-          <p><strong>Mô tả sản phẩm:</strong> Là sản phẩm thời trang , trẻ trung, năng động phù hợp với giới trẻ hiện nay.</p>
-          
+          <p>
+            <strong>Mô tả sản phẩm:</strong> Là sản phẩm thời trang , trẻ trung,
+            năng động phù hợp với giới trẻ hiện nay.
+          </p>
+
           <div>
-            <p><strong ><b>Size:</b></strong> <span>{{ selectedProduct.SP_size.toLocaleString() }} </span></p>
-            <p><strong ><b>Chú ý:</b></strong> <span>Để xác định size có phù hợp không vui lòng click vào trang <router-link to="/home/chonsize"><b>Cách chọn size</b></router-link> </span></p>
+            <p>
+              <strong><b>Size:</b></strong>
+              <span>{{ selectedProduct.SP_size.toLocaleString() }} </span>
+            </p>
+            <p>
+              <strong><b>Chú ý:</b></strong>
+              <span
+                >Để xác định size có phù hợp không vui lòng click vào trang
+                <router-link to="/home/chonsize"
+                  ><b>Cách chọn size</b></router-link
+                >
+              </span>
+            </p>
             <label for="quantity">Số lượng:</label>
             <input type="number" v-model="quantity" min="1" max="5" />
           </div>
@@ -38,15 +57,15 @@
           </div>
         </div>
       </div>
-</div>
+    </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-  props: ['NPS_ma'],
+  props: ["NPS_ma"],
   data() {
     return {
       products: [],
@@ -59,10 +78,10 @@ export default {
   computed: {
     categoryName() {
       return this.categories[this.NPS_ma] || "Không xác định";
-    }
+    },
   },
   watch: {
-    NPS_ma: "fetchProducts"
+    NPS_ma: "fetchProducts",
   },
   mounted() {
     this.fetchProducts();
@@ -70,7 +89,9 @@ export default {
   methods: {
     async fetchProducts() {
       try {
-        const response = await axios.get(`http://localhost:5000/api/latest-products`);
+        const response = await axios.get(
+          `http://localhost:5000/api/latest-products`
+        );
         this.products = response.data;
       } catch (error) {
         console.error("Lỗi tải danh sách sản phẩm:", error);
@@ -90,61 +111,78 @@ export default {
         name: this.selectedProduct.SP_ten,
         price: this.selectedProduct.SP_price,
         size: this.selectedSize || "Mặc định",
-        quantity: this.quantity
+        quantity: this.quantity,
       };
-      localStorage.setItem('buyNowProduct', JSON.stringify(buyNowProduct));
-      this.$router.push('/buy1prod');
+      localStorage.setItem("buyNowProduct", JSON.stringify(buyNowProduct));
+      this.$router.push("/buy1prod");
     },
-      addToCart(product) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    addToCart(product) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-        // Tìm sản phẩm trong giỏ hàng (nếu có size, so sánh theo size)
-        let item = cart.find(p => p.id === product.SP_ma && (!product.SP_size || p.size === this.selectedSize));
+      // Tìm sản phẩm trong giỏ hàng (nếu có size, so sánh theo size)
+      let item = cart.find(
+        (p) =>
+          p.id === product.SP_ma &&
+          (!product.SP_size || p.size === this.selectedSize)
+      );
 
-        if (item) {
-            // Nếu sản phẩm đã có, tăng số lượng (giới hạn 5)
-            if (item.quantity < 5) {
-                item.quantity += this.quantity;
-            } else {
-                alert("Bạn chỉ có thể mua tối đa 5 sản phẩm!");
-            }
+      if (item) {
+        // Nếu sản phẩm đã có, tăng số lượng (giới hạn 5)
+        if (item.quantity < 5) {
+          item.quantity += this.quantity;
         } else {
-            // Nếu chưa có, thêm sản phẩm vào giỏ hàng
-            cart.push({
-                img: product.SP_hinh_anh,
-                id: product.SP_ma,
-                name: product.SP_ten,
-                price:  product.SP_price, // Kiểm tra API trả về giá nào
-                size: this.selectedSize || "Mặc định", // Nếu không có size, để "Mặc định"
-                quantity: this.quantity
-            });
+          alert("Bạn chỉ có thể mua tối đa 5 sản phẩm!");
         }
-
-        // Lưu giỏ hàng vào localStorage
-        localStorage.setItem('cart', JSON.stringify(cart));
-
-        // Cập nhật giỏ hàng trong Vue để hiển thị đúng
-        this.cart = cart;
-        alert("Đã thêm vào giỏ hàng!");
-        window.location.reload();
-    }
+      } else {
+        // Nếu chưa có, thêm sản phẩm vào giỏ hàng
+        cart.push({
+          img: product.SP_hinh_anh,
+          id: product.SP_ma,
+          name: product.SP_ten,
+          price: product.SP_price, // Kiểm tra API trả về giá nào
+          size: this.selectedSize || "Mặc định", // Nếu không có size, để "Mặc định"
+          quantity: this.quantity,
+        });
       }
 
+      // Lưu giỏ hàng vào localStorage
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      // Cập nhật giỏ hàng trong Vue để hiển thị đúng
+      this.cart = cart;
+      alert("Đã thêm vào giỏ hàng!");
+      window.location.reload();
+    },
+  },
 };
 </script>
 
 <style scoped>
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 20px;
   padding: 20px;
   background-color: #f9f9f9;
+  box-sizing: border-box;
 }
-.product-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
+
+/* Với màn hình nhỏ hơn 768px */
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+    padding: 15px;
+  }
+}
+
+/* Với màn hình rất nhỏ (điện thoại nhỏ) */
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+    padding: 10px;
+  }
 }
 
 .product-card {
@@ -211,7 +249,7 @@ h2 {
   padding-top: 20px;
 }
 .modal-overlay {
- position: fixed;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -221,7 +259,7 @@ h2 {
   justify-content: center;
   align-items: center;
   z-index: 9999; /* Đảm bảo modal luôn nằm trên cùng */
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .modal {
@@ -257,7 +295,8 @@ h2 {
   margin-bottom: 8px;
 }
 
-.modal select, .modal input {
+.modal select,
+.modal input {
   width: 100px;
   padding: 5px;
   margin-left: 10px;
@@ -290,7 +329,6 @@ h2 {
   border: none;
   font-size: 18px;
   cursor: pointer;
-   color: white;
+  color: white;
 }
-
 </style>

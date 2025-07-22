@@ -1,13 +1,23 @@
-<template>
+<template v-if="showSearchPage">
   <div class="search-page container">
     <h2 class="search-title">Kết quả tìm kiếm cho: "{{ keyword }}"</h2>
-    
+
     <div v-if="products.length > 0" class="product-grid">
-      <div v-for="product in products" :key="product.SP_ma" class="product-card">
-        <img :src="product.SP_hinh_anh" :alt="product.SP_ten" class="product-img" />
+      <div
+        v-for="product in products"
+        :key="product.SP_ma"
+        class="product-card"
+      >
+        <img
+          :src="product.SP_hinh_anh"
+          :alt="product.SP_ten"
+          class="product-img"
+        />
         <h3 class="product-name">{{ product.SP_ten }}</h3>
         <p class="product-price">{{ product.SP_price.toLocaleString() }} đ</p>
-        <router-link :to="`/san-pham/${product.NPS_ma}`" class="view-detail">Xem chi tiết</router-link>
+        <router-link :to="`/san-pham/${product.NPS_ma}`" class="view-detail"
+          >Xem chi tiết</router-link
+        >
       </div>
     </div>
 
@@ -19,38 +29,53 @@
 
 <script>
 import axios from "axios";
+import { getCurrentInstance } from "vue";
 
 export default {
+  // Inject thủ công để có thể truy cập trong `this`
+  beforeCreate() {
+    const internalInstance = getCurrentInstance();
+    this.showSearchPage = internalInstance.appContext.provides.showSearchPage;
+  },
+
   data() {
     return {
       keyword: "",
-      products: []
+      products: [],
     };
   },
+
   created() {
     this.keyword = this.$route.query.q || "";
-    this.fetchSearchResults();
-  },
-  watch: {
-    '$route.query.q'(newQuery) {
-      this.keyword = newQuery;
+    console.log("Injected showSearchPage:", this.showSearchPage);
+
+    if (this.showSearchPage?.value) {
+      console.log("✅ showSearchPage = true, gọi fetchSearchResults");
       this.fetchSearchResults();
     }
+  },
+  watch: {
+    "$route.query.q": function (newQuery) {
+      this.keyword = newQuery || "";
+      this.fetchSearchResults();
+    },
   },
   methods: {
     fetchSearchResults() {
       if (!this.keyword.trim()) return;
 
       axios
-        .get(`http://localhost:5000/api/search?q=${this.keyword}`)
-        .then(res => {
-          this.products = res.data;
+        .get(`http://localhost:5000/api/products`)
+        .then((res) => {
+          this.products = res.data.filter((product) =>
+            product.SP_ten.toLowerCase().includes(this.keyword.toLowerCase())
+          );
         })
         .catch(() => {
           this.products = [];
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

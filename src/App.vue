@@ -22,18 +22,22 @@ import Home from './components/Home.vue';
   </div>
 </template> -->
 
-
 <script setup>
-import { computed } from 'vue';
-import { useRoute } from 'vue-router';
-import Hometp from './components/homepages/Hometp.vue';
-import Headerd from './components/homepages/Header.vue';
-import Footerd from './components/homepages/footer.vue';
-import policed from './components/homepages/police.vue';
-import Admin from './components/Admin.vue';
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+import Hometp from "./components/homepages/Hometp.vue";
+import Headerd from "./components/homepages/Header.vue";
+import Footerd from "./components/homepages/footer.vue";
+import policed from "./components/homepages/police.vue";
+import Admin from "./components/Admin.vue";
+import searchsp from "./components/homepages/viewhome/searchsp.vue";
+import { ref, provide } from "vue";
 
 const route = useRoute();
-const isAdminPage = computed(() => route.path.startsWith('/admin'));
+const isAdminPage = computed(() => route.path.startsWith("/admin"));
+
+const showSearchPage = ref(false); // ✅ dùng ref
+provide("showSearchPage", showSearchPage);
 </script>
 
 <template>
@@ -42,6 +46,7 @@ const isAdminPage = computed(() => route.path.startsWith('/admin'));
     <template v-else>
       <Hometp />
       <Headerd />
+      <SearchPage v-if="showSearchPage" />
       <RouterView />
       <policed />
       <Footerd />
