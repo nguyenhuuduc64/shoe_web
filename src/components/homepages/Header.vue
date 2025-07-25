@@ -1,296 +1,172 @@
 <template>
-  <div class="navbar">
-    <div class="container" style="display: block">
-      <!-- nb = navbar -->
-      <div class="nb-wp">
-        <div class="nb-main">
-          <!--  -->
-          <!-- NAVBAR LEFT -->
-          <!--  -->
-          <RouterLink to="/home" class="nb__left">
-            <a href="index.html" class="nb__left-logo">
-              <img src="/src/assets/logo.png" alt="Logo" class="nb__left-img" />
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <!-- Logo -->
+      <RouterLink to="/home" class="navbar-brand">
+        <img src="/src/assets/logo.png" alt="Logo" height="40" />
+      </RouterLink>
+
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Collapsible content -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <!-- Center menu -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <RouterLink to="/san-pham/new_product" class="nav-link">
+              Hàng mới về <span class="badge bg-danger">HOT</span>
+            </RouterLink>
+          </li>
+
+          <!-- Dropdown GIÀY NAM -->
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+            >
+              GIÀY NAM
             </a>
-          </RouterLink>
-          <!--  -->
-          <!-- NAVBAR CENTER -->
-          <!--  -->
-          <div class="nb__center">
-            <div class="nb__center-nav">
-              <ul class="nb__center-menu">
-                <li class="nb__center-item">
-                  <router-link
-                    to="/san-pham/new_product"
-                    class="nb__center-link"
-                    >Hàng mới về</router-link
-                  >
-                  <span class="nb__center-tag">HOT</span>
-                </li>
-                <!-- --has-sub-menu = có menu con -->
-                <li class="nb__center-item --has-sub-menu">
-                  <a href="#" class="nb__center-link">GIÀY NAM</a>
-                  <ul class="nb__center-sub-menu">
-                    <li class="nb__center-sub-item">
-                      <router-link
-                        to="/san-pham/N01"
-                        class="nb__center-sub-link"
-                        >Giày thể thao nam</router-link
-                      >
-                    </li>
-                    <li class="nb__center-sub-item">
-                      <router-link
-                        to="/san-pham/N02"
-                        class="nb__center-sub-link"
-                        >Giày tây nam</router-link
-                      >
-                    </li>
-                    <li class="nb__center-sub-item">
-                      <router-link
-                        to="/san-pham/N03"
-                        class="nb__center-sub-link"
-                        >Sandal nam</router-link
-                      >
-                    </li>
-                    <li class="nb__center-sub-item">
-                      <router-link
-                        to="/san-pham/N04"
-                        class="nb__center-sub-link"
-                        >Dép nam</router-link
-                      >
-                    </li>
-                  </ul>
-                </li>
+            <ul class="dropdown-menu">
+              <li>
+                <RouterLink to="/san-pham/N01" class="dropdown-item"
+                  >Giày thể thao nam</RouterLink
+                >
+              </li>
+              <li>
+                <RouterLink to="/san-pham/N02" class="dropdown-item"
+                  >Giày tây nam</RouterLink
+                >
+              </li>
+              <li>
+                <RouterLink to="/san-pham/N03" class="dropdown-item"
+                  >Sandal nam</RouterLink
+                >
+              </li>
+              <li>
+                <RouterLink to="/san-pham/N04" class="dropdown-item"
+                  >Dép nam</RouterLink
+                >
+              </li>
+            </ul>
+          </li>
 
-                <li class="nb__center-item --has-sub-menu">
-                  <a href="#" class="nb__center-link">GIÀY NỮ</a>
-                  <ul class="nb__center-sub-menu">
-                    <li class="nb__center-sub-item">
-                      <router-link
-                        to="/san-pham/N05"
-                        class="nb__center-sub-link"
-                        >Giày thể thao nữ</router-link
-                      >
-                    </li>
-                    <li class="nb__center-sub-item">
-                      <router-link
-                        to="/san-pham/N06"
-                        class="nb__center-sub-link"
-                        >Sandal nữ</router-link
-                      >
-                    </li>
-                    <li class="nb__center-sub-item">
-                      <router-link
-                        to="/san-pham/N07"
-                        class="nb__center-sub-link"
-                        >Dép nữ</router-link
-                      >
-                    </li>
-                  </ul>
-                </li>
+          <!-- Dropdown GIÀY NỮ -->
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+            >
+              GIÀY NỮ
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <RouterLink to="/san-pham/N05" class="dropdown-item"
+                  >Giày thể thao nữ</RouterLink
+                >
+              </li>
+              <li>
+                <RouterLink to="/san-pham/N06" class="dropdown-item"
+                  >Sandal nữ</RouterLink
+                >
+              </li>
+              <li>
+                <RouterLink to="/san-pham/N07" class="dropdown-item"
+                  >Dép nữ</RouterLink
+                >
+              </li>
+            </ul>
+          </li>
 
-                <li class="nb__center-item --has-sub-menu">
-                  <a href="#" class="nb__center-link">PHỤ KIỆN</a>
-                  <ul class="nb__center-sub-menu">
-                    <li class="nb__center-sub-item">
-                      <router-link
-                        to="/san-pham/N08"
-                        class="nb__center-sub-link"
-                        >Balo</router-link
-                      >
-                    </li>
-                    <li class="nb__center-sub-item">
-                      <router-link
-                        to="/san-pham/N09"
-                        class="nb__center-sub-link"
-                        >Tất</router-link
-                      >
-                    </li>
-                    <li class="nb__center-sub-item">
-                      <router-link
-                        to="/san-pham/N10"
-                        class="nb__center-sub-link"
-                        >Dế lót giày</router-link
-                      >
-                    </li>
-                    <li class="nb__center-sub-item">
-                      <router-link
-                        to="/san-pham/N11"
-                        class="nb__center-sub-link"
-                        >Dây giày</router-link
-                      >
-                    </li>
-                    <li class="nb__center-sub-item">
-                      <router-link
-                        to="/san-pham/N12"
-                        class="nb__center-sub-link"
-                        >Nước vệ sinh giày</router-link
-                      >
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <!--  -->
-          <!-- NAVBAR RIGHT -->
-          <!--  -->
-          <div class="nb__right">
-            <div class="nb__right-wp">
-              <div class="nb__right-main">
-                <!--  -->
-                <!-- SEARCH -->
-                <!--  -->
-                <div class="nb__right-search-wp">
-                  <div class="nb__right-search">
-                    <div class="nb__right-inp">
-                      <input
-                        class="nb__right-form-inp"
-                        type="text"
-                        v-model="searchQuery"
-                        @input="handleSearch"
-                        @keyup.enter="handleSubmit"
-                        placeholder="Tìm kiếm..."
-                      />
-                    </div>
-                    <div class="nb__right-btn-search">
-                      <font-awesome-icon
-                        :icon="['fas', 'search']"
-                        class="icon"
-                      />
+          <!-- Dropdown PHỤ KIỆN -->
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+            >
+              PHỤ KIỆN
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <RouterLink to="/san-pham/N08" class="dropdown-item"
+                  >Balo</RouterLink
+                >
+              </li>
+              <li>
+                <RouterLink to="/san-pham/N09" class="dropdown-item"
+                  >Tất</RouterLink
+                >
+              </li>
+              <li>
+                <RouterLink to="/san-pham/N10" class="dropdown-item"
+                  >Lót giày</RouterLink
+                >
+              </li>
+              <li>
+                <RouterLink to="/san-pham/N11" class="dropdown-item"
+                  >Dây giày</RouterLink
+                >
+              </li>
+              <li>
+                <RouterLink to="/san-pham/N12" class="dropdown-item"
+                  >Nước vệ sinh giày</RouterLink
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
 
-                      <i class="fa fa-search"></i>
-                    </div>
-                  </div>
-                </div>
-                <Recommand
-                  v-if="suggestedProducts && suggestedProducts.length > 0"
-                  :products="suggestedProducts"
-                  :keyword="searchQuery"
-                  @select="handleSelect"
-                />
-                <!--  -->
-                <!-- CART -->
-                <!--  -->
-                <div class="nb__right-cart-wp" @click="toggleCart">
-                  <div class="icon-wrapper">
-                    <div class="icon-box">
-                      <font-awesome-icon
-                        :icon="['fas', 'shopping-cart']"
-                        class="icon"
-                      />
-                      <span v-if="cart.length > -1" class="cart-badge">{{
-                        cart.length
-                      }}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <!-- form giỏ hàng -->
-    <div v-if="showCart" class="cart-container">
-      <div class="cart-header">
-        <h3>Giỏ hàng của bạn</h3>
-        <button class="close-btn" @click="toggleCart">✖</button>
-      </div>
-
-      <div class="cart-item-list">
-        <!-- Thêm div này để chứa danh sách sản phẩm -->
-        <div v-for="(item, index) in cart" :key="index" class="cart-item">
-          <img :src="item.img" :alt="item.name" class="cart-img" />
-          <div class="cart-details">
-            <h4>{{ item.name }}</h4>
-            <p>
-              Giá:
-              <span class="price">{{ item.price.toLocaleString() }} đ</span>
-            </p>
-            <p>Size: {{ item.size }}</p>
-            <div class="quantity-controls">
-              <button @click="decreaseQuantity(index)">-</button>
-              <span>{{ item.quantity }}</span>
-              <button @click="increaseQuantity(index)">+</button>
-            </div>
-          </div>
-          <button class="delete-btn" @click="removeItem(index)">Xóa</button>
-        </div>
-      </div>
-      <!-- Kết thúc div có thanh cuộn -->
-
-      <div class="cart-footer">
-        <p>
-          <strong>Tổng:</strong>
-          <span class="total-price">{{ totalPrice.toLocaleString() }} đ</span>
-        </p>
-        <button class="checkout-btn" @click="openCheckoutModal">
-          Thanh toán
-        </button>
-      </div>
-    </div>
-  </div>
-  <!--form đặt-->
-  <div v-if="showCheckoutModal" class="mo">
-    <div class="mo-content">
-      <button class="close-btn" @click="closeCheckoutModal">✖</button>
-      <div class="info-co">
-        <h2>THANH TOÁN</h2>
-        <label class="nhan">Tên đầy đủ *</label>
-        <input class="in" v-model="order.KH_hoten" type="text" required />
-
-        <label class="nhan">Email *</label>
-        <input class="in" v-model="order.KH_email" type="email" required />
-
-        <label class="nhan">Số điện thoại *</label>
-        <input class="in" v-model="order.KH_sdt" type="text" required />
-        <label class="nhan">Địa chỉ *</label>
-        <input
-          class="in"
-          v-model="order.addr"
-          type="text"
-          placeholder="Nhập địa chỉ giao hàng"
-          required
-        />
-        <label class="nhan">Cách thức giao hàng *</label>
-        <select class="in" v-model="order.shippingMethod">
-          <option>Giao hàng tận nơi</option>
-          <option>Nhận tại cửa hàng</option>
-        </select>
-
-        <label class="nhan">Phương thức thanh toán *</label>
-        <select class="in" v-model="order.paymentMethod">
-          <option>Thanh toán khi nhận hàng</option>
-          <option>Chuyển khoản</option>
-        </select>
-
-        <div
-          v-if="order.paymentMethod === 'Chuyển khoản'"
-          class="payment-image"
-        >
-          <img
-            src="/src/assets/img/QRcode.jpg"
-            alt="Thông tin chuyển khoản"
-            width="100%"
+        <!-- Right: Search + Cart -->
+        <form class="d-flex me-3">
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Tìm kiếm..."
+            v-model="searchQuery"
+            @input="handleSearch"
+            @keyup.enter="handleSubmit"
           />
-        </div>
+          <button
+            class="btn btn-outline-success"
+            type="submit"
+            @click.prevent="handleSubmit"
+          >
+            Tìm kiếm
+          </button>
+        </form>
 
-        <button @click="submitOrder" class="btn btn-success">
-          Xác nhận đặt hàng
-        </button>
-      </div>
-
-      <div class="cart-co">
-        <h3>GIỎ HÀNG</h3>
-        <div v-for="item in order.cart" :key="item.id" class="cart-i">
-          <img :src="item.img" />
-          <p>{{ item.name }} - {{ item.price }} đ x {{ item.quantity }}</p>
+        <!-- Cart Icon -->
+        <div
+          class="position-relative"
+          @click="toggleCart"
+          style="cursor: pointer"
+        >
+          <i class="fas fa-shopping-cart fa-lg"></i>
+          <span
+            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+          >
+            {{ cart.length }}
+          </span>
         </div>
       </div>
     </div>
-  </div>
+  </nav>
 </template>
 
 <script>
