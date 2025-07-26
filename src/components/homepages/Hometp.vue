@@ -10,8 +10,8 @@
             <i class="fa fa-phone tp__left-icon me-1"></i>
             Hotline:
             <a href="tel:0123456789" class="tp__left-phone ms-1"
-              >0123 456 789</a
-            >
+              >0123 456 789
+            </a>
           </div>
         </div>
 

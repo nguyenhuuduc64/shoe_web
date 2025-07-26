@@ -1,6 +1,8 @@
 <template>
-  <div class="wrapper">
-    <h3>Sản phẩm gợi ý cho: "{{ keyword }}"</h3>
+  <div
+    class="wrapper"
+    style="position: absolute; top: 60px; right: 40px; width: 200px"
+  >
     <ul>
       <li
         v-for="product in products.slice(0, 10)"

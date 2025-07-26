@@ -23,6 +23,8 @@ import Home from './components/Home.vue';
 </template> -->
 
 <script setup>
+import "@fortawesome/fontawesome-free/css/all.min.css";
+
 import { computed } from "vue";
 import { useRoute } from "vue-router";
 import Hometp from "./components/homepages/Hometp.vue";

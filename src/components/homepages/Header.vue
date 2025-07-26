@@ -6,13 +6,13 @@
         <img src="/src/assets/logo.png" alt="Logo" height="40" />
       </RouterLink>
 
-      <!-- Toggle button -->
+      <!-- Toggle button (hiện ra trên mobile) -->
       <button
         class="navbar-toggler"
         type="button"
         data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
+        data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
@@ -20,8 +20,8 @@
       </button>
 
       <!-- Collapsible content -->
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <!-- Center menu -->
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <!-- Menu trái -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <RouterLink to="/san-pham/new_product" class="nav-link">
@@ -132,41 +132,88 @@
           </li>
         </ul>
 
-        <!-- Right: Search + Cart -->
-        <form class="d-flex me-3">
-          <input
-            class="form-control me-2"
-            type="search"
-            placeholder="Tìm kiếm..."
-            v-model="searchQuery"
-            @input="handleSearch"
-            @keyup.enter="handleSubmit"
-          />
-          <button
-            class="btn btn-outline-success"
-            type="submit"
-            @click.prevent="handleSubmit"
-          >
-            Tìm kiếm
-          </button>
-        </form>
+        <!-- Search và Giỏ hàng bên phải -->
+        <div class="d-flex align-items-center gap-3">
+          <!-- Search -->
+          <form class="d-flex flex-grow-1 flex-md-grow-0">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Tìm kiếm..."
+              v-model="searchQuery"
+              @input="handleSearch"
+              @keyup.enter="handleSubmit"
+            />
+            <button
+              class="btn btn-outline-success"
+              type="submit"
+              @click.prevent="handleSubmit"
+            >
+              Tìm kiếm
+            </button>
+          </form>
 
-        <!-- Cart Icon -->
-        <div
-          class="position-relative"
-          @click="toggleCart"
-          style="cursor: pointer"
-        >
-          <i class="fas fa-shopping-cart fa-lg"></i>
-          <span
-            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+          <!-- Recommand -->
+          <Recommand
+            v-if="suggestedProducts.length > 0"
+            :products="suggestedProducts"
+            @select-product="searchQuery = $event"
+          />
+
+          <!-- Cart Icon -->
+          <div
+            class="position-relative"
+            @click="toggleCart"
+            style="cursor: pointer"
           >
-            {{ cart.length }}
-          </span>
+            <i class="fa-solid fa-cart-shopping fa-lg"></i>
+            <span
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+            >
+              {{ cart.length }}
+            </span>
+          </div>
         </div>
       </div>
     </div>
   </nav>
+
+  <!-- Giỏ hàng -->
+  <div v-if="showCart" class="cart-container">
+    <div class="cart-header">
+      <h3>Giỏ hàng của bạn</h3>
+      <button class="close-btn" @click="toggleCart">✖</button>
+    </div>
+
+    <div class="cart-item-list">
+      <div v-for="(item, index) in cart" :key="index" class="cart-item">
+        <img :src="item.img" :alt="item.name" class="cart-img" />
+        <div class="cart-details">
+          <h4>{{ item.name }}</h4>
+          <p>
+            Giá: <span class="price">{{ item.price.toLocaleString() }} đ</span>
+          </p>
+          <p>Size: {{ item.size }}</p>
+          <div class="quantity-controls">
+            <button @click="decreaseQuantity(index)">-</button>
+            <span>{{ item.quantity }}</span>
+            <button @click="increaseQuantity(index)">+</button>
+          </div>
+        </div>
+        <button class="delete-btn" @click="removeItem(index)">Xóa</button>
+      </div>
+    </div>
+
+    <div class="cart-footer">
+      <p>
+        <strong>Tổng:</strong>
+        <span class="total-price">{{ totalPrice.toLocaleString() }} đ</span>
+      </p>
+      <button class="checkout-btn" @click="openCheckoutModal">
+        Thanh toán
+      </button>
+    </div>
+  </div>
 </template>
 
 <script>
