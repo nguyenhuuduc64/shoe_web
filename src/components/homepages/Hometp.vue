@@ -1,16 +1,26 @@
 <template>
   <div class="topbar">
-    <div class="container">
+    <div class="">
       <!-- tp = topbar -->
       <div
-        class="tp-wp d-flex flex-wrap justify-content-between align-items-center py-2"
+        class=""
+        style="
+          display: flex;
+          width: 100vw;
+          justify-content: space-around;
+          padding: 0 18px;
+        "
       >
         <div class="tp__left d-flex align-items-center mb-2 mb-md-0">
           <div class="tp__left-hline d-flex align-items-center">
             <i class="fa fa-phone tp__left-icon me-1"></i>
             Hotline:
-            <a href="tel:0123456789" class="tp__left-phone ms-1"
-              >0123 456 789
+            <a
+              href="tel:0123456789"
+              class="tp__left-phone ms-1"
+              style="padding-left: 10px"
+            >
+              0123 456 789
             </a>
           </div>
         </div>
@@ -24,7 +34,9 @@
                 <div class="tp__right-link">Giới thiệu</div>
               </RouterLink>
               <RouterLink to="/home/chonsize" class="tp__right-item">
-                <div class="tp__right-link">Cách chọn size</div>
+                <div class="tp__right-link" style="padding: 0 14px">
+                  Cách chọn size
+                </div>
               </RouterLink>
             </ul>
           </div>
@@ -42,7 +54,7 @@
                   class="tp-usr-heading d-flex align-items-center gap-1"
                   @click="toggleDropdown"
                 >
-                  <h3 class="tp-usr-name mb-0">{{ user.username }}</h3>
+                  <h3 class="tp-usr-name mb-0">{{ user.KH_hoten }}</h3>
                   <i class="fa fa-angle-down"></i>
                 </div>
 

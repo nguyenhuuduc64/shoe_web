@@ -35,26 +35,6 @@ import Admin from "./components/Admin.vue";
 import searchsp from "./components/homepages/viewhome/searchsp.vue";
 import { ref, provide } from "vue";
 
-// 1. Import the toolbar
-import { initToolbar } from "@stagewise/toolbar";
-
-// 2. Define your toolbar configuration
-const stagewiseConfig = {
-  plugins: [],
-};
-
-// 3. Initialize the toolbar when your app starts
-// Framework-agnostic approach - call this when your app initializes
-function setupStagewise() {
-  // Only initialize once and only in development mode
-  if (process.env.NODE_ENV === "development") {
-    initToolbar(stagewiseConfig);
-  }
-}
-
-// Call the setup function when appropriate for your framework
-setupStagewise();
-
 const route = useRoute();
 const isAdminPage = computed(() => route.path.startsWith("/admin"));
 

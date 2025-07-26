@@ -415,8 +415,8 @@ export default {
 
 .cart-container {
   position: absolute;
-  top: 170px; /* Điều chỉnh khoảng cách dưới icon giỏ hàng */
-  right: 20px;
+  top: 100px; /* Điều chỉnh khoảng cách dưới icon giỏ hàng */
+  right: 10px;
   background: rgb(243, 232, 232);
   width: 400px;
   max-width: 90%;
