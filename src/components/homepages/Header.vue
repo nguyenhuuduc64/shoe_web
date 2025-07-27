@@ -357,9 +357,13 @@ export default {
     ////////////////////
     loadCart() {
       this.cart = JSON.parse(localStorage.getItem("cart")) || [];
+      console.log("Giỏ hàng đã được tải:", this.cart);
     },
     toggleCart() {
-      this.showCart = !this.showCart; // Đảo trạng thái hiển thị
+      this.showCart = !this.showCart; // Đảo trạng thái hiển
+      if (this.showCart) {
+        this.loadCart(); // Tải giỏ hàng khi mở
+      }
     },
     increaseQuantity(index) {
       if (this.cart[index].quantity < 5) {
