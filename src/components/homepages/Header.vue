@@ -281,7 +281,7 @@ export default {
         this.suggestedProducts = "";
       }
     },
-    handleSubmit() {
+    handleSubmit(e) {
       console.log("searchQuery:", this.searchQuery); // ✅ dùng this
 
       if (this.showSearchPage) {
@@ -298,6 +298,8 @@ export default {
           p.SP_ten.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
       });
+      this.suggestedProducts = [];
+      e.target.value = ""; // Xóa giá trị input sau khi tìm kiếm
     },
 
     ///////////////////
