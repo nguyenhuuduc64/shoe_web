@@ -388,6 +388,11 @@ export default {
     },
 
     removeItem(index) {
+      const confirmDelete = confirm(
+        "Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?"
+      );
+      if (!confirmDelete) return; // Nếu người dùng không xác nhận, không làm gì cả
+      console.log("Xóa sản phẩm tại index:", index);
       this.cart.splice(index, 1);
       this.saveCart();
     },
